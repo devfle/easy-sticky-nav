@@ -1,0 +1,25 @@
+{
+  "name": "easy-sticky-nav",
+  "version": "1.0.0",
+  "description": "An easy way to add a modern sticky bottom navigation to your Home-Assistant installation.",
+  "main": "./dist/main.js",
+  "scripts": {
+    "build": "npx tsc",
+    "code-styles": "npx prettier ./src/*",
+    "code-styles:format": "npx prettier ./src/* --write"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/devfle/easy-sticky-nav"
+  },
+  "keywords": [
+    "home-assistant",
+    "custom-card"
+  ],
+  "author": "devfle",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2"
+  }
+}
