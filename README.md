@@ -1,6 +1,9 @@
 # Easy Sticky Nav
 An easy way to add a modern sticky bottom navigation to your Home-Assistant installation.
 
+<img width="1516" height="754" alt="01" src="https://github.com/user-attachments/assets/515c4639-8c70-471b-8b0c-937a25a27db5" />
+
+
 ## Options
 
 | Property      | Type                  | Required | Description                                                        |
