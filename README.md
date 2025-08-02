@@ -53,3 +53,11 @@ If you hide the header you can still enter the edit-mode of Home-Assistant with:
 ?edit=1
 ```
 
+## Installation
+
+1. Build the project `npm run build`
+2. Copy the `dist/main.js` file to your Home-Assistant instance inside the `www` folder (I suggest renaming main.js into easy-sticky-nav.js)
+3. Include and load the file from your Home-Assistant settings
+4. Add the custom card config to your dashboard
+
+
