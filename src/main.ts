@@ -22,7 +22,7 @@ class EasyStickyNav extends HTMLElement {
     if (!this.content) {
       this.innerHTML = `
         <style>
-            .ha-fixed-navigation {
+            .easy-sticky-nav {
                 height: 48px;
                 min-width: ${this.config.minWidth};
                 max-width: 90%;
@@ -36,12 +36,12 @@ class EasyStickyNav extends HTMLElement {
                 justify-content: center;
                 align-items: center;
                 
-                .ha-fixed-navigation__content {
+                .easy-sticky-nav__content {
                     flex: 1 0 auto;
                 }
                 
                 
-                .ha-fixed-navigation__inner {
+                .easy-sticky-nav__inner {
                     display: flex;
                     list-style: none;
                     color: #FFF;
@@ -70,8 +70,8 @@ class EasyStickyNav extends HTMLElement {
             }
         </style>
         
-        <ha-card class="ha-fixed-navigation">
-          <div class="ha-fixed-navigation__content">Loading...</div>
+        <ha-card class="easy-sticky-nav">
+          <div class="easy-sticky-nav__content">Loading...</div>
         </ha-card>
       `;
 
@@ -111,7 +111,7 @@ class EasyStickyNav extends HTMLElement {
 
     if (this.content) {
       this.content.innerHTML = `
-          <ul class="ha-fixed-navigation__inner"></ul>
+          <ul class="easy-sticky-nav__inner"></ul>
       `;
 
       navElements.forEach((elm) =>
