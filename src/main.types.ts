@@ -12,4 +12,16 @@ type HassConfig = {
   nav_items: NavigationElement[];
 };
 
-export type { HassConfig, NavigationElement };
+type TapConfig = {
+  action: "navigate";
+  navigation_path: string;
+};
+
+type TapEvent = {
+  config: {
+    tap_action: TapConfig;
+  };
+  action: "tap";
+};
+
+export type { HassConfig, NavigationElement, TapConfig, TapEvent };
