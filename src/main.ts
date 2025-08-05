@@ -1,8 +1,14 @@
-import type { HassConfig, NavigationElement } from "./main.types";
+import type {
+  HassConfig,
+  NavigationElement,
+  TapConfig,
+  TapEvent,
+} from "./main.types";
 
 class EasyStickyNav extends HTMLElement {
   config!: HassConfig;
   content!: HTMLElement | null;
+  isEditMode: boolean = false;
 
   getHuiRootElementFromDom() {
     const huiElm = document
@@ -16,6 +22,10 @@ class EasyStickyNav extends HTMLElement {
     if (!huiElm) return null;
 
     return huiElm;
+  }
+
+  set editMode(state: boolean) {
+    this.isEditMode = state;
   }
 
   set hass(hass: any) {
@@ -35,6 +45,7 @@ class EasyStickyNav extends HTMLElement {
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                z-index: 1000;
                 
                 .easy-sticky-nav__content {
                     flex: 1 0 auto;
@@ -84,12 +95,19 @@ class EasyStickyNav extends HTMLElement {
       const viewContainer =
         huiRootElm?.querySelector<HTMLElement>("hui-view-container");
 
-      if (headerElm && viewContainer) {
+      if (!headerElm || !viewContainer) {
+        return;
+      }
+
+      if (!this.isEditMode) {
         // remove the header element
         headerElm.style.display = "none";
 
         // remove the padding from the header element
         viewContainer.style.padding = "0px";
+      } else {
+        headerElm.style.display = "block";
+        viewContainer.style.padding = "82px";
       }
     }
 
@@ -100,9 +118,15 @@ class EasyStickyNav extends HTMLElement {
       const iconElm = document.createElement("ha-icon");
 
       iconElm.setAttribute("icon", item.icon);
-      listElm.addEventListener("click", () =>
-        window.location.replace(item.url),
-      );
+
+      listElm.addEventListener("click", () => {
+        const tapEvent = this.registerEvent({
+          action: "navigate",
+          navigation_path: item.url,
+        });
+
+        this.dispatchEvent(tapEvent);
+      });
 
       listElm.appendChild(iconElm);
 
@@ -144,6 +168,24 @@ class EasyStickyNav extends HTMLElement {
     }
 
     this.config = { ...config, ...tempConfig };
+  }
+
+  registerEvent(config: TapConfig) {
+    const event = new Event("hass-action", {
+      bubbles: true,
+      composed: true,
+    }) as Event & { detail: TapEvent };
+
+    event.detail = {
+      config: {
+        tap_action: {
+          ...config,
+        },
+      },
+      action: "tap",
+    };
+
+    return event;
   }
 
   getCardSize() {
